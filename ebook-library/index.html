@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Student E-Book Library — Pro Demo</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">📚 Student E-Book Library</div>
+
+    <div class="search-area">
+      <input id="q" placeholder="Search books (programming, math, austen...)"/>
+      <button id="searchBtn">Search</button>
+      <button id="uploadBtn" title="Upload PDF">⬆️ Upload</button>
+      <input id="fileInput" type="file" accept="application/pdf" class="hidden">
+    </div>
+
+    <div class="controls">
+      <button id="showAll" class="ghost">All</button>
+      <button id="showFavs" class="ghost">Favorites</button>
+      <button id="exportFavs" class="ghost">Export</button>
+
+      <!-- Filter -->
+      <select id="filterSource">
+        <option value="all">All sources</option>
+        <option value="gutendex">Public Domain (Gutendex)</option>
+        <option value="google">Google Books</option>
+        <option value="upload">My Uploads</option>
+      </select>
+
+      <!-- Sort -->
+      <select id="sortBy">
+        <option value="relevance">Relevance</option>
+        <option value="title">Title (A→Z)</option>
+        <option value="downloads">Downloads (High→Low)</option>
+      </select>
+
+      <button id="darkToggle" class="ghost">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="info" class="info">
+      Combined: Google Books + Gutendex (public PDFs). Includes uploads, notes, reading progress.
+    </section>
+
+    <section id="controlsBar" class="controlsBar">
+      <div id="recommendation" class="recommendation hidden"></div>
+    </section>
+
+    <section id="grid" class="grid"></section>
+
+    <div class="pager" id="pager">
+      <button id="prevPage" class="btn">Previous</button>
+      <span id="pageInfo"></span>
+      <button id="nextPage" class="btn">Next</button>
+    </div>
+
+    <section id="empty" class="empty hidden">
+      <h3>No results</h3>
+      <p>Try another search term.</p>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <button id="closeModal" class="close">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div>Public PDFs via Gutendex + previews via Google.</div>
+    <div class="small">Upload PDF → add title → saved to My Uploads.</div>
+  </footer>
+
+  <script type="module" src="scripts/app.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
+</body>
+</html>
